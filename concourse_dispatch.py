@@ -58,7 +58,7 @@ def handler(event: None, context: None) -> None:  # pylint: disable=unused-argum
             if group["AutoScalingGroupName"] != group_name:
                 raise ValueError(f"Auto Scaling returned group with different name than expected for {group_name}")
 
-            if group["DesiredCapacity"] == 0:
+            if group["DesiredCapacity"] == 0 and group["MaxSize"] != 0:
                 autoscaling.set_desired_capacity(
                     AutoScalingGroupName=group_name,
                     DesiredCapacity=1,
