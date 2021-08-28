@@ -39,8 +39,8 @@ def handler(event: None, context: None) -> None:  # pylint: disable=unused-argum
 
                 concourse_steps_waiting[tag] = concourse_steps_waiting.get(tag, 0) + sample.value
 
-    for tag in concourse_steps_waiting:
-        if concourse_steps_waiting[tag] == 0:
+    for tag, count in concourse_steps_waiting.items():
+        if count == 0:
             continue
         if tag in TAG_TO_AUTO_SCALING_GROUP:
             group_name = TAG_TO_AUTO_SCALING_GROUP[tag]
